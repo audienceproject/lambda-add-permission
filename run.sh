@@ -4,9 +4,9 @@
 # Input
 # -----------
 # function name
+# action
 # principal
 # source arn
-# action
 #
 # -----------
 # Pseudo code
@@ -22,18 +22,13 @@ STATEMENT_ID="SID-$WERCKER_LAMBDA_ADD_PERMISSION_FUNCTION_NAME+$WERCKER_LAMBDA_A
 set +e
 # Returns 0 if statement ID already exists
 aws lambda get-policy --function-name $WERCKER_LAMBDA_ADD_PERMISSION_FUNCTION_NAME | grep $STATEMENT_ID
-if [ $? == 0 ]; then
-    # Remove permission with statement ID
-    aws lambda remove-permission --function-name $WERCKER_LAMBDA_ADD_PERMISSION_FUNCTION_NAME --statement-id $STATEMENT_ID
+if [ $? -ne 0 ]; then
+    # Add permission
+    aws lambda add-permission \
+    --function-name $WERCKER_LAMBDA_ADD_PERMISSION_FUNCTION_NAME \
+    --statement-id $STATEMENT_ID \
+    --action $WERCKER_LAMBDA_ADD_PERMISSION_ACTION \
+    --principal $WERCKER_LAMBDA_ADD_PERMISSION_PRINCIPAL \
+    --source-arn $WERCKER_LAMBDA_ADD_PERMISSION_SOURCE_ARN
 fi
 set -e
-# Add permission
-aws lambda add-permission \
---function-name $WERCKER_LAMBDA_ADD_PERMISSION_FUNCTION_NAME \
---statement-id $STATEMENT_ID \
---action $WERCKER_LAMBDA_ADD_PERMISSION_ACTION \
---principal $WERCKER_LAMBDA_ADD_PERMISSION_PRINCIPAL \
---source-arn $WERCKER_LAMBDA_ADD_PERMISSION_SOURCE_ARN
-
-# One could argue that we don't need to delete the existing permission if the statement-id matches.
-# This approach was chosen because it ensures that the statement-id matches the intended permission.
