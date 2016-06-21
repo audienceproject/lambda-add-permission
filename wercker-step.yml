@@ -1,0 +1,20 @@
+name: lambda-add-permission
+version: 1.0.1
+description: A Wercker step that adds a permission to a Lambda function
+keywords:
+  - lambda
+  - aws
+  - permissions
+properties:
+  function-name:
+    type: string
+    required: true
+  action:
+    type: string
+    required: true
+  principal:
+    type: string
+    required: true
+  source-arn:
+    type: string
+    required: true
