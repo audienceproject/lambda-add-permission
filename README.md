@@ -20,13 +20,22 @@ The effect of running the step is that the `principal` and `source arn` gets per
 
 ## Examples
 
-Allow the CloudWatch rule `my-funky-rule` to invoke the Lambda function `my-funky-function`
+Allow a CloudWatch rule to invoke a Lambda function:
 
 ```
-steps:
-    - audienceproject/lambda-add-permission@1.0.1:
-        function-name: my-funky-function
-        action: lambda:InvokeFunction
-        principal: events.amazonaws.com
-        source-arn: arn:aws:events:1234456789:rule/my-funky-rule
+- audienceproject/lambda-add-permission@1.0.1:
+    function-name: my-funky-function
+    action: lambda:InvokeFunction
+    principal: events.amazonaws.com
+    source-arn: arn:aws:events:us-east-1:1234456789:rule/my-funky-rule
+```
+
+Allow an API Gateway method to invoke a Lambda function:
+
+```
+- audienceproject/lambda-add-permission@1.0.3:
+    function-name: my-funky-function
+    action: lambda:InvokeFunction
+    principal: apigateway.amazonaws.com
+    source-arn: arn:aws:execute-api:us-east-1:1234456789:abzxyz123/*/GET/foo/bar
 ```
