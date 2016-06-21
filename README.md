@@ -15,7 +15,8 @@ The effect of running the step is that the `principal` and `source arn` gets per
 
 ## Dependencies
 
-* Amazon Web Services CLI
+* The `md5sum` command
+* The `aws` command (Amazon Web Services CLI)
 
 ## Examples
 

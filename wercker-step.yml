@@ -1,5 +1,5 @@
 name: lambda-add-permission
-version: 1.0.2
+version: 1.0.3
 description: A Wercker step that adds a permission to a Lambda function
 keywords:
   - lambda
