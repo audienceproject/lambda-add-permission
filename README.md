@@ -13,6 +13,10 @@ The input to the step is as follows:
 
 The effect of running the step is that the `principal` and `source arn` gets permission to invoke the `action` on the `named function`.
 
+## Dependencies
+
+* Amazon Web Services CLI
+
 ## Examples
 
 TODO
